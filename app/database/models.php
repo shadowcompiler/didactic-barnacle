@@ -16,7 +16,13 @@
 		// create and save a database object
       $db = $this->conn();
       $create_request = $db->prepare('INSERT INTO '.$table.'('.$field.') VALUES('.$values.')');
-      $create_request->execute(explode(',', $data));
+      $create_request->execute(explode('%', $data));
+	  if($create_request->errorCode()=='00000'){
+		return 'ok';
+	  }
+	  else{
+		return $create_request->errorInfo();
+	  }
 
     }
     public function read($table, $field)
@@ -27,11 +33,11 @@
 			return $read_request;
 		}
 
-    public function read_filter_once($table, $field, $sfield, $value)
+		public function read_filter_once($table, $field, $sfield, $value)
 		{
-      		// get and return a database object
-			$db=$this->conn();
-			$read_request=$db->prepare('SELECT '.$field.' FROM '.$table.' WHERE '.$sfield.'=?');
+			// get and return a database object
+			$db = $this->conn();
+			$read_request = $db->prepare('SELECT ' . $field . ' FROM ' . $table . ' WHERE ' . $sfield . '=?');
 			$read_request->execute(array($value));
 			return $read_request;
 		}
@@ -46,5 +52,5 @@
 		}
 
   }
-// author @Tech Solution Pro
+// author @henrid3v
 ?>
