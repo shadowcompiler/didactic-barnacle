@@ -52,5 +52,5 @@
 		}
 
   }
-// author @henrid3v
+
 ?>

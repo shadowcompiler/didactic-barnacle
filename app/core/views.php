@@ -43,6 +43,7 @@ function form_submission()
         
         
             header("Content-Type: application/json");
+            header('Access-Control-Allow-Origin: *');
             http_response_code(201);
 
         echo json_encode([
@@ -51,6 +52,8 @@ function form_submission()
         }
         catch(Exception $e){
             http_response_code(500);
+            header("Content-Type: application/json");
+            header('Access-Control-Allow-Origin: *');
             echo json_encode([
               
                 'message' => $e
@@ -81,6 +84,7 @@ function get_submission(){
             
             $obj = $request->fetch();
             header('Content-Type: application/json');
+            header('Access-Control-Allow-Origin: *');
             http_response_code(200);
             echo json_encode(
                 [
@@ -103,6 +107,7 @@ function get_submission(){
         }
         catch(Exception $e){
             header('Content-Type: application/json');
+            header('Access-Control-Allow-Origin: *');
             http_response_code(404);
             json_encode(['message'=>$e]);
         }
@@ -148,6 +153,7 @@ function get_all(){
 
            }
             header('Content-Type: application/json');
+            header('Access-Control-Allow-Origin: *');
             http_response_code(200);
             echo json_encode(
               $data
@@ -155,6 +161,7 @@ function get_all(){
         }
         catch(Exception $e){
             header('Content-Type: application/json');
+            header('Access-Control-Allow-Origin: *');
             http_response_code(404);
             json_encode(['message'=>$e]);
         }
@@ -164,4 +171,4 @@ function get_all(){
 }
  
 
-//author: @henrid3v
+
