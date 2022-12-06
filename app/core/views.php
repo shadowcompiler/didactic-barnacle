@@ -169,6 +169,45 @@ function get_all(){
 
     }
 }
+
+function del_submission(){
+    require(__DIR__ . '/../database/models.php');
+    $request_method = $_SERVER['REQUEST_METHOD'];
+    if($request_method=='DELETE' || $request_method=='OPTIONS'){
+        header('Access-Control-Allow-Methods', 'HEAD, GET, POST, PUT, DELETE');
+        header('Access-Control-Allow-Origin: *');
+        if(isset($_GET['id']))
+        {
+            
+        $model_obj = new model();
+        $table = 'submission';
+        $sfield='id';
+        $value = $_GET['id'];
+        
+        try{
+           $model_obj->_delete($table, $sfield, $value);
+            
+            
+            header('Content-Type: application/json');
+            
+            http_response_code(200);
+            echo json_encode(
+                [
+                 'message'=>"Deleted successfull"
+                     ]
+            );
+        }
+        catch(Exception $e){
+            header('Content-Type: application/json');
+            
+            http_response_code(404);
+            json_encode(['message'=>$e]);
+        }
+        }
+
+
+    }
+}
  
 
 
