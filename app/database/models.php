@@ -50,7 +50,13 @@
 			$read_request->execute(explode(',', $values));
 			return $read_request;
 		}
-
+		
+		public function _delete($table, $sfield, $value)
+		{
+			$db = $this->conn();
+			$read_request = $db->query("DELETE FROM ".$table." WHERE ".$sfield." = ".$value."");
+			return $read_request;
+		}
   }
 
 ?>
